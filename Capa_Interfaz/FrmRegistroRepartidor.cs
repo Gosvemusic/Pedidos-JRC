@@ -57,7 +57,7 @@ namespace Capa_Interfaz
             {
                 MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }                           
+        }
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             LimpiarCampos();
@@ -75,6 +75,10 @@ namespace Capa_Interfaz
             txtIdentificacion.Focus();
         }
 
+        private void cboActivo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

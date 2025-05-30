@@ -14,22 +14,41 @@ namespace Capa_Interfaz
     public partial class FrmConsultaCliente : Form
     {
         private LogCliente logica = new LogCliente();
-        private DataGridView dgvClientes;
+
         public FrmConsultaCliente()
         {
             InitializeComponent();
+            ConfigurarDataGridView();
             CargarDatos();
         }
+
+        private void ConfigurarDataGridView()
+        {
+            // Limpiar columnas existentes
+            dataGridView1.Columns.Clear();
+
+            // Agregar columnas
+            dataGridView1.Columns.Add("Identificacion", "Identificación");
+            dataGridView1.Columns.Add("Nombre", "Nombre");
+            dataGridView1.Columns.Add("PrimerApellido", "Primer Apellido");
+            dataGridView1.Columns.Add("SegundoApellido", "Segundo Apellido");
+            dataGridView1.Columns.Add("FechaNacimiento", "Fecha de Nacimiento");
+            dataGridView1.Columns.Add("Activo", "Activo");
+
+            // Configurar ancho de columnas
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+
         private void CargarDatos()
         {
             try
             {
-                dgvClientes.Rows.Clear();
+                dataGridView1.Rows.Clear();
                 var clientes = logica.ObtenerTodos();
 
                 foreach (var cliente in clientes)
                 {
-                    dgvClientes.Rows.Add(
+                    dataGridView1.Rows.Add(
                         cliente.Identificacion,
                         cliente.Nombre,
                         cliente.PrimerApellido,
@@ -46,3 +65,4 @@ namespace Capa_Interfaz
         }
     }
 }
+

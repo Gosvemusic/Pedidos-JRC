@@ -14,27 +14,38 @@ namespace Capa_Interfaz
     public partial class FrmConsultaTipoArticulo : Form
     {
         private LogTipoArticulo logica = new LogTipoArticulo();
-        private DataGridView dgvTiposArticulo;
+
         public FrmConsultaTipoArticulo()
         {
             InitializeComponent();
+            ConfigurarDataGridView();
             CargarDatos();
         }
 
-        private void dgvTipoArticulo_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void ConfigurarDataGridView()
         {
+            // Limpiar columnas existentes
+            dgvTipoArticulo.Columns.Clear();
 
+            // Agregar columnas
+            dgvTipoArticulo.Columns.Add("ID", "ID");
+            dgvTipoArticulo.Columns.Add("Nombre", "Nombre");
+            dgvTipoArticulo.Columns.Add("Descripcion", "Descripción");
+
+            // Configurar ancho de columnas
+            dgvTipoArticulo.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
+
         private void CargarDatos()
         {
             try
             {
-                
+                dgvTipoArticulo.Rows.Clear();
                 var tipos = logica.ObtenerTodos();
 
                 foreach (var tipo in tipos)
                 {
-                    dgvTiposArticulo.Rows.Add(
+                    dgvTipoArticulo.Rows.Add(
                         tipo.Id,
                         tipo.Nombre,
                         tipo.Descripcion
@@ -46,6 +57,12 @@ namespace Capa_Interfaz
                 MessageBox.Show("Error al cargar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void dgvTipoArticulo_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
+
 

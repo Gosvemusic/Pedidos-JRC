@@ -113,6 +113,7 @@
             cboActivo.Size = new Size(175, 23);
             cboActivo.TabIndex = 8;
             cboActivo.Text = "Activo";
+            cboActivo.SelectedIndexChanged += cboActivo_SelectedIndexChanged;
             // 
             // btnGuardar
             // 
