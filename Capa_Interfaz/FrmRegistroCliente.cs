@@ -17,16 +17,25 @@ namespace Capa_Interfaz
         private LogCliente logica = new LogCliente();
         public FrmRegistroCliente()
         {
+     
             InitializeComponent();
-        }
+            ConfigurarComboActivo();
 
+        }
+        private void ConfigurarComboActivo()
+        {
+            cboActivo.Items.Clear();
+            cboActivo.Items.Add("Sí");
+            cboActivo.Items.Add("No");
+            cboActivo.SelectedIndex = 0; // Por defecto "Si"
+        }
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             try
             {
                 ClienteEntidad cliente = new ClienteEntidad();
 
-                // Validar identificación numérica
+                // Validar identificación numerica
                 if (!int.TryParse(txtIdentificacion.Text, out int identificacion))
                 {
                     MessageBox.Show("La identificación debe ser un número", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

@@ -43,11 +43,13 @@
             gbEncabezado = new GroupBox();
             gbDetalle = new GroupBox();
             ((System.ComponentModel.ISupportInitialize)dgvDetalle).BeginInit();
+            gbEncabezado.SuspendLayout();
+            gbDetalle.SuspendLayout();
             SuspendLayout();
             // 
             // txtNumeroPedido
             // 
-            txtNumeroPedido.Location = new Point(279, 74);
+            txtNumeroPedido.Location = new Point(206, 22);
             txtNumeroPedido.Name = "txtNumeroPedido";
             txtNumeroPedido.Size = new Size(174, 23);
             txtNumeroPedido.TabIndex = 0;
@@ -55,7 +57,7 @@
             // 
             // dtpFechaPedido
             // 
-            dtpFechaPedido.Location = new Point(265, 152);
+            dtpFechaPedido.Location = new Point(191, 95);
             dtpFechaPedido.Name = "dtpFechaPedido";
             dtpFechaPedido.Size = new Size(200, 23);
             dtpFechaPedido.TabIndex = 1;
@@ -63,7 +65,7 @@
             // llbFechaPedido
             // 
             llbFechaPedido.AutoSize = true;
-            llbFechaPedido.Location = new Point(313, 122);
+            llbFechaPedido.Location = new Point(240, 66);
             llbFechaPedido.Name = "llbFechaPedido";
             llbFechaPedido.Size = new Size(97, 15);
             llbFechaPedido.TabIndex = 2;
@@ -72,7 +74,7 @@
             // cboCliente
             // 
             cboCliente.FormattingEnabled = true;
-            cboCliente.Location = new Point(279, 209);
+            cboCliente.Location = new Point(206, 164);
             cboCliente.Name = "cboCliente";
             cboCliente.Size = new Size(174, 23);
             cboCliente.TabIndex = 3;
@@ -81,7 +83,7 @@
             // cboRepartidor
             // 
             cboRepartidor.FormattingEnabled = true;
-            cboRepartidor.Location = new Point(279, 284);
+            cboRepartidor.Location = new Point(206, 229);
             cboRepartidor.Name = "cboRepartidor";
             cboRepartidor.Size = new Size(174, 23);
             cboRepartidor.TabIndex = 4;
@@ -89,7 +91,7 @@
             // 
             // txtDireccion
             // 
-            txtDireccion.Location = new Point(279, 354);
+            txtDireccion.Location = new Point(206, 288);
             txtDireccion.Name = "txtDireccion";
             txtDireccion.Size = new Size(174, 23);
             txtDireccion.TabIndex = 5;
@@ -118,7 +120,7 @@
             btnAgregarArticulo.Name = "btnAgregarArticulo";
             btnAgregarArticulo.Size = new Size(129, 35);
             btnAgregarArticulo.TabIndex = 10;
-            btnAgregarArticulo.Text = "Agregar Articulo";
+            btnAgregarArticulo.Text = "Agregar al Pedido";
             btnAgregarArticulo.UseVisualStyleBackColor = true;
             btnAgregarArticulo.Click += btnAgregarArticulo_Click;
             // 
@@ -133,11 +135,11 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(12, 588);
+            label2.Location = new Point(6, 196);
             label2.Name = "label2";
-            label2.Size = new Size(70, 15);
+            label2.Size = new Size(107, 15);
             label2.TabIndex = 12;
-            label2.Text = "Lista Detalle";
+            label2.Text = "Detalles del Pedido";
             // 
             // btnRegistrarPedido
             // 
@@ -145,27 +147,34 @@
             btnRegistrarPedido.Name = "btnRegistrarPedido";
             btnRegistrarPedido.Size = new Size(129, 33);
             btnRegistrarPedido.TabIndex = 13;
-            btnRegistrarPedido.Text = "Registrar Pedido";
+            btnRegistrarPedido.Text = "Guardar Pedido";
             btnRegistrarPedido.UseVisualStyleBackColor = true;
             btnRegistrarPedido.Click += btnRegistrarPedido_Click;
             // 
             // gbEncabezado
             // 
+            gbEncabezado.Controls.Add(txtNumeroPedido);
+            gbEncabezado.Controls.Add(cboCliente);
+            gbEncabezado.Controls.Add(cboRepartidor);
+            gbEncabezado.Controls.Add(dtpFechaPedido);
+            gbEncabezado.Controls.Add(llbFechaPedido);
+            gbEncabezado.Controls.Add(txtDireccion);
             gbEncabezado.Location = new Point(73, 12);
             gbEncabezado.Name = "gbEncabezado";
             gbEncabezado.Size = new Size(612, 378);
             gbEncabezado.TabIndex = 14;
             gbEncabezado.TabStop = false;
-            gbEncabezado.Text = "PEDIDO";
+            gbEncabezado.Text = "Registro de Pedido";
             // 
             // gbDetalle
             // 
+            gbDetalle.Controls.Add(label2);
             gbDetalle.Location = new Point(12, 396);
             gbDetalle.Name = "gbDetalle";
             gbDetalle.Size = new Size(771, 418);
             gbDetalle.TabIndex = 15;
             gbDetalle.TabStop = false;
-            gbDetalle.Text = "DETALLE DEL PEDIDO";
+            gbDetalle.Text = "Agregar Articulos al Pedido";
             // 
             // FrmRegistroPedido
             // 
@@ -173,22 +182,19 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(795, 865);
             Controls.Add(btnRegistrarPedido);
-            Controls.Add(label2);
             Controls.Add(dgvDetalle);
             Controls.Add(btnAgregarArticulo);
             Controls.Add(txtCantidad);
             Controls.Add(cboArticulo);
-            Controls.Add(txtDireccion);
-            Controls.Add(cboRepartidor);
-            Controls.Add(cboCliente);
-            Controls.Add(llbFechaPedido);
-            Controls.Add(dtpFechaPedido);
-            Controls.Add(txtNumeroPedido);
             Controls.Add(gbEncabezado);
             Controls.Add(gbDetalle);
             Name = "FrmRegistroPedido";
             Text = "FrmRegistroPedido";
             ((System.ComponentModel.ISupportInitialize)dgvDetalle).EndInit();
+            gbEncabezado.ResumeLayout(false);
+            gbEncabezado.PerformLayout();
+            gbDetalle.ResumeLayout(false);
+            gbDetalle.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }

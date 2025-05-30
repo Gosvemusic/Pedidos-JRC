@@ -20,7 +20,11 @@ namespace Capa_Interfaz
         {
             InitializeComponent();
             CargarTiposArticulo();
+            ConfigurarComboActivo();
+
         }
+      
+
         private void CargarTiposArticulo()
         {
             try
@@ -35,27 +39,36 @@ namespace Capa_Interfaz
                 MessageBox.Show("Error al cargar tipos de artículo: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void ConfigurarComboActivo()
+        {
+            cboActivo.Items.Clear();
+            cboActivo.Items.Add("Sí");
+            cboActivo.Items.Add("No");
+            cboActivo.SelectedIndex = 0; // Por defecto "Sí"
+        }
+
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             try
             {
                 ArticuloEntidad articulo = new ArticuloEntidad();
 
-                // Validar ID numérico
+                // Validar ID numerico
                 if (!int.TryParse(txtId.Text, out int id))
                 {
                     MessageBox.Show("El ID debe ser un número", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                // Validar valor numérico
+                // Validar valor numerico
                 if (!double.TryParse(txtValor.Text, out double valor))
                 {
                     MessageBox.Show("El valor debe ser un número", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                // Validar inventario numérico
+                // Validar inventario numerico
                 if (!int.TryParse(txtInventario.Text, out int inventario))
                 {
                     MessageBox.Show("El inventario debe ser un número", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

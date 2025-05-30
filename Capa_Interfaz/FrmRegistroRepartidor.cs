@@ -18,8 +18,15 @@ namespace Capa_Interfaz
         public FrmRegistroRepartidor()
         {
             InitializeComponent();
+            ConfigurarComboActivo();
         }
-
+        private void ConfigurarComboActivo()
+        {
+            cboActivo.Items.Clear();
+            cboActivo.Items.Add("Sí");
+            cboActivo.Items.Add("No");
+            cboActivo.SelectedIndex = 0; // Por defecto "Sí"
+        }
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             try
