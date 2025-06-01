@@ -17,7 +17,7 @@ namespace Capa_Interfaz
         private LogCliente logica = new LogCliente();
         public FrmRegistroCliente()
         {
-     
+
             InitializeComponent();
             ConfigurarComboActivo();
 
@@ -27,15 +27,23 @@ namespace Capa_Interfaz
             cboActivo.Items.Clear();
             cboActivo.Items.Add("Sí");
             cboActivo.Items.Add("No");
-            cboActivo.SelectedIndex = 0; // Por defecto "Si"
+            cboActivo.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboActivo.SelectedIndex = 0; // Por defecto "Sí"
+
         }
-        private void btnGuardar_Click(object sender, EventArgs e)
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bnGuardar_Click(object sender, EventArgs e)
         {
             try
             {
                 ClienteEntidad cliente = new ClienteEntidad();
 
-                // Validar identificación numerica
+                // Validar identificación numérica
                 if (!int.TryParse(txtIdentificacion.Text, out int identificacion))
                 {
                     MessageBox.Show("La identificación debe ser un número", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -47,7 +55,7 @@ namespace Capa_Interfaz
                 cliente.PrimerApellido = txtPrimerApellido.Text;
                 cliente.SegundoApellido = txtSegundoApellido.Text;
                 cliente.FechaNacimiento = dtpFechaNacimiento.Value;
-                cliente.Activo = cboActivo.Text == "Sí";
+                cliente.Activo = cboActivo.SelectedItem.ToString() == "Sí";
 
                 string resultado = logica.Insertar(cliente);
 
@@ -66,6 +74,7 @@ namespace Capa_Interfaz
                 MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             LimpiarCampos();
@@ -78,9 +87,14 @@ namespace Capa_Interfaz
             txtPrimerApellido.Clear();
             txtSegundoApellido.Clear();
             dtpFechaNacimiento.Value = DateTime.Now;
-            cboActivo.SelectedIndex = -1;
+            cboActivo.SelectedIndex = 0;
             txtIdentificacion.Focus();
         }
+private void cboActivo_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
+        }
     }
 }
+
+        

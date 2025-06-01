@@ -47,7 +47,7 @@ namespace Capa_Interfaz
         private void ConfigurarDataGridView()
         {
             dgvDetalle.Columns.Clear();
-            dgvDetalle.Columns.Add("NumeroPedido", "Número Pedido");
+            dgvDetalle.Columns.Add("NumeroPedido", "Numero Pedido");
             dgvDetalle.Columns.Add("IdArticulo", "ID Artículo");
             dgvDetalle.Columns.Add("NombreArticulo", "Nombre Artículo");
             dgvDetalle.Columns.Add("TipoArticulo", "Tipo Artículo");
@@ -102,7 +102,7 @@ namespace Capa_Interfaz
                 else
                 {
                     MessageBox.Show("El pedido ha sido registrado exitosamente",
-                        "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        "exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LimpiarFormulario();
                 }
             }
@@ -122,7 +122,7 @@ namespace Capa_Interfaz
                 // Validar número de pedido
                 if (!int.TryParse(txtNumeroPedido.Text, out int numeroPedido))
                 {
-                    MessageBox.Show("El número de pedido debe ser un número", "Error",
+                    MessageBox.Show("El numero de pedido debe ser un numero", "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
@@ -152,7 +152,7 @@ namespace Capa_Interfaz
 
                 if (string.IsNullOrWhiteSpace(txtDireccion.Text))
                 {
-                    MessageBox.Show("La dirección es requerida", "Error",
+                    MessageBox.Show("La direccion es requerida", "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
@@ -254,7 +254,7 @@ namespace Capa_Interfaz
                     cboArticulo.SelectedIndex = -1;
                     txtCantidad.Clear();
 
-                    // Recargar artículos activos
+                    // Recargar articulos activos
                     CargarCombos();
                 }
                 else
@@ -286,6 +286,11 @@ namespace Capa_Interfaz
             btnRegistrarPedido.Text = "Registrar Pedido";
 
             txtNumeroPedido.Focus();
+        }
+
+        private void cboArticulo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

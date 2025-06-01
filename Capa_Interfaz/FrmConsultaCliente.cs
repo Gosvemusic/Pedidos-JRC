@@ -22,6 +22,7 @@ namespace Capa_Interfaz
             CargarDatos();
         }
 
+    
         private void ConfigurarDataGridView()
         {
             // Limpiar columnas existentes
