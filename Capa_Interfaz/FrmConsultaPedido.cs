@@ -14,6 +14,8 @@ namespace Capa_Interfaz
     public partial class FrmConsultaPedido : Form
     {
         private LogPedido logica = new LogPedido();
+        private DataGridView dgvEncabezados;
+        private DataGridView dgvDetalles;
         private Label lblEncabezados;
         private Label lblDetalles;
 
@@ -21,21 +23,28 @@ namespace Capa_Interfaz
         {
             InitializeComponent();
             ConfigurarFormulario();
-            ConfigurarDataGridViews();
-            CargarDatos();
         }
 
         private void ConfigurarFormulario()
         {
+            // Ocultar o eliminar el DataGridView del designer
+            if (dataGridView1 != null)
+            {
+                this.Controls.Remove(dataGridView1);
+                dataGridView1.Dispose();
+            }
+
             // Configurar el formulario
             this.Text = "Consulta de Pedidos";
             this.Size = new Size(1000, 700);
+            this.StartPosition = FormStartPosition.CenterScreen;
 
             // Crear y configurar controles
             lblEncabezados = new Label();
             lblEncabezados.Text = "Encabezados de Pedidos";
             lblEncabezados.Location = new Point(12, 12);
             lblEncabezados.Size = new Size(200, 20);
+            lblEncabezados.Font = new Font("Arial", 10, FontStyle.Bold);
 
             dgvEncabezados = new DataGridView();
             dgvEncabezados.Location = new Point(12, 35);
@@ -43,12 +52,14 @@ namespace Capa_Interfaz
             dgvEncabezados.AllowUserToAddRows = false;
             dgvEncabezados.ReadOnly = true;
             dgvEncabezados.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvEncabezados.MultiSelect = false;
             dgvEncabezados.SelectionChanged += dgvEncabezados_SelectionChanged;
 
             lblDetalles = new Label();
             lblDetalles.Text = "Detalles del Pedido";
             lblDetalles.Location = new Point(12, 300);
             lblDetalles.Size = new Size(200, 20);
+            lblDetalles.Font = new Font("Arial", 10, FontStyle.Bold);
 
             dgvDetalles = new DataGridView();
             dgvDetalles.Location = new Point(12, 323);
@@ -62,13 +73,18 @@ namespace Capa_Interfaz
             this.Controls.Add(lblDetalles);
             this.Controls.Add(dgvDetalles);
 
+            // Configurar columnas
+            ConfigurarDataGridViews();
+
+            // Cargar datos
+            CargarDatos();
         }
 
         private void ConfigurarDataGridViews()
         {
-            // Configurar columnas del grid de encabezados (11 columnas)
+            // Configurar columnas del grid de encabezados
             dgvEncabezados.Columns.Clear();
-            dgvEncabezados.Columns.Add("NumeroPedido", "Número de Pedido");
+            dgvEncabezados.Columns.Add("NumeroPedido", "Numero de Pedido");
             dgvEncabezados.Columns.Add("FechaPedido", "Fecha de Pedido");
             dgvEncabezados.Columns.Add("ClienteId", "Cliente ID");
             dgvEncabezados.Columns.Add("ClienteNombre", "Nombre Cliente");
@@ -80,11 +96,16 @@ namespace Capa_Interfaz
             dgvEncabezados.Columns.Add("RepartidorSegundoApellido", "Segundo Apellido");
             dgvEncabezados.Columns.Add("Direccion", "Dirección");
 
-            dgvEncabezados.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            // Ajustar tamaño de columnas
+            foreach (DataGridViewColumn col in dgvEncabezados.Columns)
+            {
+                col.Width = 100;
+            }
+            dgvEncabezados.Columns["Direccion"].Width = 150;
 
-            // Configurar columnas del grid de detalles (5 columnas)
+            // Configurar columnas del grid de detalles
             dgvDetalles.Columns.Clear();
-            dgvDetalles.Columns.Add("ArticuloId", "ID Artículo");
+            dgvDetalles.Columns.Add("ArticuloId", "ID Articulo");
             dgvDetalles.Columns.Add("ArticuloNombre", "Nombre Artículo");
             dgvDetalles.Columns.Add("TipoArticulo", "Tipo de Artículo");
             dgvDetalles.Columns.Add("Cantidad", "Cantidad");
@@ -116,6 +137,9 @@ namespace Capa_Interfaz
                         pedido.Direccion
                     );
                 }
+
+                // Limpiar detalles al inicio
+                dgvDetalles.Rows.Clear();
             }
             catch (Exception ex)
             {
@@ -130,7 +154,7 @@ namespace Capa_Interfaz
             {
                 dgvDetalles.Rows.Clear();
 
-                if (dgvEncabezados.CurrentRow != null)
+                if (dgvEncabezados.CurrentRow != null && dgvEncabezados.CurrentRow.Index >= 0)
                 {
                     int numeroPedido = Convert.ToInt32(dgvEncabezados.CurrentRow.Cells["NumeroPedido"].Value);
                     var detalles = logica.ObtenerDetallesPorPedido(numeroPedido);

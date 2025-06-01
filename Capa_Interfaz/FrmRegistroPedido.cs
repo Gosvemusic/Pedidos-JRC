@@ -35,19 +35,24 @@ namespace Capa_Interfaz
             dtpFechaPedido.Format = DateTimePickerFormat.Short;
             dtpFechaPedido.Value = DateTime.Today;
 
-            // Deshabilitar la sección de detalle al inicio
-            gbDetalle.Enabled = false;
+            // Habilitar todo al inicio
+            gbEncabezado.Enabled = true;
+            gbDetalle.Enabled = true;
 
-            // Limpiar placeholders de los TextBox
+            // Configurar el botón
+            btnRegistrarPedido.Text = "Guardar Pedido";
+
+            // Limpiar placeholders
             txtNumeroPedido.Text = "";
             txtDireccion.Text = "";
             txtCantidad.Text = "";
+
         }
 
         private void ConfigurarDataGridView()
         {
             dgvDetalle.Columns.Clear();
-            dgvDetalle.Columns.Add("NumeroPedido", "Numero Pedido");
+            dgvDetalle.Columns.Add("NumeroPedido", "Número Pedido");
             dgvDetalle.Columns.Add("IdArticulo", "ID Artículo");
             dgvDetalle.Columns.Add("NombreArticulo", "Nombre Artículo");
             dgvDetalle.Columns.Add("TipoArticulo", "Tipo Artículo");
@@ -64,24 +69,36 @@ namespace Capa_Interfaz
             {
                 // Cargar clientes activos
                 var clientes = logicaCliente.ObtenerActivos();
-                cboCliente.DataSource = clientes;
-                cboCliente.DisplayMember = "Nombre";
-                cboCliente.ValueMember = "Identificacion";
-                cboCliente.SelectedIndex = -1;
+                cboCliente.Items.Clear();
+                cboCliente.Items.Add("");
+                foreach (var cliente in clientes)
+                {
+                    cboCliente.Items.Add(cliente);
+                }
+                cboCliente.DisplayMember = "";
+                cboCliente.SelectedIndex = 0;
 
                 // Cargar repartidores activos
                 var repartidores = logicaRepartidor.ObtenerActivos();
-                cboRepartidor.DataSource = repartidores;
-                cboRepartidor.DisplayMember = "Nombre";
-                cboRepartidor.ValueMember = "Identificacion";
-                cboRepartidor.SelectedIndex = -1;
+                cboRepartidor.Items.Clear();
+                cboRepartidor.Items.Add("");
+                foreach (var repartidor in repartidores)
+                {
+                    cboRepartidor.Items.Add(repartidor);
+                }
+                cboRepartidor.DisplayMember = "";
+                cboRepartidor.SelectedIndex = 0;
 
                 // Cargar artículos activos
                 var articulos = logicaArticulo.ObtenerActivos();
-                cboArticulo.DataSource = articulos;
-                cboArticulo.DisplayMember = "Nombre";
-                cboArticulo.ValueMember = "Id";
-                cboArticulo.SelectedIndex = -1;
+                cboArticulo.Items.Clear();
+                cboArticulo.Items.Add("");
+                foreach (var articulo in articulos)
+                {
+                    cboArticulo.Items.Add(articulo);
+                }
+                cboArticulo.DisplayMember = "";
+                cboArticulo.SelectedIndex = 0;
             }
             catch (Exception ex)
             {
@@ -90,7 +107,8 @@ namespace Capa_Interfaz
             }
         }
 
-        // Este es el método correcto para guardar el pedido
+
+        
         private void btnRegistrarPedido_Click(object sender, EventArgs e)
         {
             try
@@ -101,8 +119,15 @@ namespace Capa_Interfaz
                 }
                 else
                 {
+                    if (dgvDetalle.Rows.Count == 0)
+                    {
+                        MessageBox.Show("Debe agregar al menos un artículo al pedido",
+                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
                     MessageBox.Show("El pedido ha sido registrado exitosamente",
-                        "exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LimpiarFormulario();
                 }
             }
@@ -117,17 +142,14 @@ namespace Capa_Interfaz
         {
             try
             {
-                PedidoEntidad pedido = new PedidoEntidad();
-
-                // Validar número de pedido
+                // Validaciones
                 if (!int.TryParse(txtNumeroPedido.Text, out int numeroPedido))
                 {
-                    MessageBox.Show("El numero de pedido debe ser un numero", "Error",
+                    MessageBox.Show("El número de pedido debe ser un número", "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                // Validar fecha
                 if (dtpFechaPedido.Value.Date < DateTime.Today)
                 {
                     MessageBox.Show("La fecha del pedido no puede ser anterior a hoy", "Error",
@@ -135,15 +157,14 @@ namespace Capa_Interfaz
                     return;
                 }
 
-                // Validar selecciones
-                if (cboCliente.SelectedIndex == -1)
+                if (cboCliente.SelectedIndex <= 0)
                 {
                     MessageBox.Show("Debe seleccionar un cliente", "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                if (cboRepartidor.SelectedIndex == -1)
+                if (cboRepartidor.SelectedIndex <= 0)
                 {
                     MessageBox.Show("Debe seleccionar un repartidor", "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -152,11 +173,12 @@ namespace Capa_Interfaz
 
                 if (string.IsNullOrWhiteSpace(txtDireccion.Text))
                 {
-                    MessageBox.Show("La direccion es requerida", "Error",
+                    MessageBox.Show("La dirección es requerida", "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
+                PedidoEntidad pedido = new PedidoEntidad();
                 pedido.NumeroPedido = numeroPedido;
                 pedido.FechaPedido = dtpFechaPedido.Value;
                 pedido.Cliente = (ClienteEntidad)cboCliente.SelectedItem;
@@ -167,12 +189,12 @@ namespace Capa_Interfaz
 
                 if (resultado == "Pedido registrado correctamente")
                 {
-                    MessageBox.Show("Encabezado del pedido guardado. Ahora puede agregar artículos.",
+                    MessageBox.Show("Encabezado del pedido guardado. Ahora agregue los artículos.",
                         "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     pedidoGuardado = true;
                     gbEncabezado.Enabled = false;
-                    gbDetalle.Enabled = true;
                     btnRegistrarPedido.Text = "Finalizar Pedido";
+                    cboArticulo.Focus();
                 }
                 else
                 {
@@ -197,14 +219,13 @@ namespace Capa_Interfaz
                     return;
                 }
 
-                if (cboArticulo.SelectedIndex == -1)
+                if (cboArticulo.SelectedIndex <= 0)
                 {
                     MessageBox.Show("Debe seleccionar un artículo", "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                // Validar cantidad
                 if (!int.TryParse(txtCantidad.Text, out int cantidad))
                 {
                     MessageBox.Show("La cantidad debe ser un número", "Error",
@@ -232,7 +253,7 @@ namespace Capa_Interfaz
                 detalle.NumeroPedido = int.Parse(txtNumeroPedido.Text);
                 detalle.Articulo = articuloSeleccionado;
                 detalle.Cantidad = cantidad;
-                detalle.Monto = articuloSeleccionado.Valor * cantidad * 1.12; // +12% de envío
+                detalle.Monto = articuloSeleccionado.Valor * cantidad * 1.12;
 
                 string resultado = logicaPedido.InsertarDetalle(detalle);
 
@@ -240,7 +261,6 @@ namespace Capa_Interfaz
                 {
                     MessageBox.Show(resultado, "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    // Agregar al DataGridView
                     dgvDetalle.Rows.Add(
                         detalle.NumeroPedido,
                         detalle.Articulo.Id,
@@ -250,11 +270,8 @@ namespace Capa_Interfaz
                         detalle.Monto.ToString("C")
                     );
 
-                    // Limpiar campos
-                    cboArticulo.SelectedIndex = -1;
+                    cboArticulo.SelectedIndex = 0;
                     txtCantidad.Clear();
-
-                    // Recargar articulos activos
                     CargarCombos();
                 }
                 else
@@ -273,22 +290,21 @@ namespace Capa_Interfaz
         {
             txtNumeroPedido.Clear();
             dtpFechaPedido.Value = DateTime.Today;
-            cboCliente.SelectedIndex = -1;
-            cboRepartidor.SelectedIndex = -1;
+            cboCliente.SelectedIndex = 0;
+            cboRepartidor.SelectedIndex = 0;
             txtDireccion.Clear();
-            cboArticulo.SelectedIndex = -1;
+            cboArticulo.SelectedIndex = 0;
             txtCantidad.Clear();
             dgvDetalle.Rows.Clear();
 
             pedidoGuardado = false;
             gbEncabezado.Enabled = true;
-            gbDetalle.Enabled = false;
-            btnRegistrarPedido.Text = "Registrar Pedido";
+            gbDetalle.Enabled = true;
+            btnRegistrarPedido.Text = "Guardar Pedido";
 
             txtNumeroPedido.Focus();
         }
-
-        private void cboArticulo_SelectedIndexChanged(object sender, EventArgs e)
+private void cboArticulo_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
