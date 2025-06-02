@@ -46,7 +46,6 @@ namespace Capa_Interfaz
             txtNumeroPedido.Text = "";
             txtDireccion.Text = "";
             txtCantidad.Text = "";
-
         }
 
         private void ConfigurarDataGridView()
@@ -63,6 +62,17 @@ namespace Capa_Interfaz
             dgvDetalle.AllowUserToAddRows = false;
         }
 
+        private class ComboBoxItem
+        {
+            public object Value { get; set; }
+            public string Display { get; set; }
+
+            public override string ToString()
+            {
+                return Display;
+            }
+        }
+
         private void CargarCombos()
         {
             try
@@ -70,34 +80,37 @@ namespace Capa_Interfaz
                 // Cargar clientes activos
                 var clientes = logicaCliente.ObtenerActivos();
                 cboCliente.Items.Clear();
-                cboCliente.Items.Add("");
+                cboCliente.Items.Add("-- Seleccione Cliente --");
+
                 foreach (var cliente in clientes)
                 {
-                    cboCliente.Items.Add(cliente);
+                    string displayText = $"{cliente.Nombre} {cliente.PrimerApellido} {cliente.SegundoApellido}";
+                    cboCliente.Items.Add(new ComboBoxItem { Value = cliente, Display = displayText });
                 }
-                cboCliente.DisplayMember = "";
                 cboCliente.SelectedIndex = 0;
 
                 // Cargar repartidores activos
                 var repartidores = logicaRepartidor.ObtenerActivos();
                 cboRepartidor.Items.Clear();
-                cboRepartidor.Items.Add("");
+                cboRepartidor.Items.Add("-- Seleccione Repartidor --");
+
                 foreach (var repartidor in repartidores)
                 {
-                    cboRepartidor.Items.Add(repartidor);
+                    string displayText = $"{repartidor.Nombre} {repartidor.PrimerApellido} {repartidor.SegundoApellido}";
+                    cboRepartidor.Items.Add(new ComboBoxItem { Value = repartidor, Display = displayText });
                 }
-                cboRepartidor.DisplayMember = "";
                 cboRepartidor.SelectedIndex = 0;
 
                 // Cargar artículos activos
                 var articulos = logicaArticulo.ObtenerActivos();
                 cboArticulo.Items.Clear();
-                cboArticulo.Items.Add("");
+                cboArticulo.Items.Add("-- Seleccione Artículo --");
+
                 foreach (var articulo in articulos)
                 {
-                    cboArticulo.Items.Add(articulo);
+                    string displayText = $"{articulo.Nombre} (Disponible: {articulo.Inventario})";
+                    cboArticulo.Items.Add(new ComboBoxItem { Value = articulo, Display = displayText });
                 }
-                cboArticulo.DisplayMember = "";
                 cboArticulo.SelectedIndex = 0;
             }
             catch (Exception ex)
@@ -108,7 +121,8 @@ namespace Capa_Interfaz
         }
 
 
-        
+
+
         private void btnRegistrarPedido_Click(object sender, EventArgs e)
         {
             try
@@ -137,6 +151,7 @@ namespace Capa_Interfaz
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void GuardarEncabezadoPedido()
         {
@@ -181,8 +196,13 @@ namespace Capa_Interfaz
                 PedidoEntidad pedido = new PedidoEntidad();
                 pedido.NumeroPedido = numeroPedido;
                 pedido.FechaPedido = dtpFechaPedido.Value;
-                pedido.Cliente = (ClienteEntidad)cboCliente.SelectedItem;
-                pedido.Repartidor = (RepartidorEntidad)cboRepartidor.SelectedItem;
+
+                ComboBoxItem selectedCliente = (ComboBoxItem)cboCliente.SelectedItem;
+                pedido.Cliente = (ClienteEntidad)selectedCliente.Value;
+
+                ComboBoxItem selectedRepartidor = (ComboBoxItem)cboRepartidor.SelectedItem;
+                pedido.Repartidor = (RepartidorEntidad)selectedRepartidor.Value;
+
                 pedido.Direccion = txtDireccion.Text;
 
                 string resultado = logicaPedido.InsertarPedido(pedido);
@@ -207,6 +227,7 @@ namespace Capa_Interfaz
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void btnAgregarArticulo_Click(object sender, EventArgs e)
         {
@@ -240,7 +261,8 @@ namespace Capa_Interfaz
                     return;
                 }
 
-                ArticuloEntidad articuloSeleccionado = (ArticuloEntidad)cboArticulo.SelectedItem;
+                ComboBoxItem selectedArticulo = (ComboBoxItem)cboArticulo.SelectedItem;
+                ArticuloEntidad articuloSeleccionado = (ArticuloEntidad)selectedArticulo.Value;
 
                 if (cantidad > articuloSeleccionado.Inventario)
                 {
@@ -253,7 +275,10 @@ namespace Capa_Interfaz
                 detalle.NumeroPedido = int.Parse(txtNumeroPedido.Text);
                 detalle.Articulo = articuloSeleccionado;
                 detalle.Cantidad = cantidad;
-                detalle.Monto = articuloSeleccionado.Valor * cantidad * 1.12;
+
+                // Calcular monto = (valor del artículo * cantidad) * 1.12
+                double subtotal = articuloSeleccionado.Valor * cantidad;
+                detalle.Monto = subtotal * 1.12;
 
                 string resultado = logicaPedido.InsertarDetalle(detalle);
 
@@ -265,13 +290,15 @@ namespace Capa_Interfaz
                         detalle.NumeroPedido,
                         detalle.Articulo.Id,
                         detalle.Articulo.Nombre,
-                        detalle.Articulo.TipoArticulo.Nombre,
+                        detalle.Articulo.TipoArticulo?.Nombre ?? "Sin tipo",
                         detalle.Cantidad,
-                        detalle.Monto.ToString("C")
+                        detalle.Monto.ToString("C2")
                     );
 
                     cboArticulo.SelectedIndex = 0;
                     txtCantidad.Clear();
+
+                    // Recargar artículos para actualizar inventario
                     CargarCombos();
                 }
                 else
@@ -303,6 +330,9 @@ namespace Capa_Interfaz
             btnRegistrarPedido.Text = "Guardar Pedido";
 
             txtNumeroPedido.Focus();
+
+            // Recargar combos
+            CargarCombos();
         }
 private void cboArticulo_SelectedIndexChanged(object sender, EventArgs e)
         {
