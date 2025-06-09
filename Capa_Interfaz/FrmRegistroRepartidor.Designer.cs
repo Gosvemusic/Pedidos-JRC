@@ -173,11 +173,11 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(92, 542);
+            label5.Location = new Point(89, 542);
             label5.Name = "label5";
-            label5.Size = new Size(149, 15);
+            label5.Size = new Size(164, 15);
             label5.TabIndex = 15;
-            label5.Text = "Estado del articulo (Activo)";
+            label5.Text = "Estado del Repartidor (Activo)";
             // 
             // FrmRegistroRepartidor
             // 

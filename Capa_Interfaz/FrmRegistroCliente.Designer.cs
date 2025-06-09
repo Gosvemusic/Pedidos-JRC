@@ -137,9 +137,9 @@
             label6.AutoSize = true;
             label6.Location = new Point(87, 383);
             label6.Name = "label6";
-            label6.Size = new Size(151, 15);
+            label6.Size = new Size(146, 15);
             label6.TabIndex = 11;
-            label6.Text = "Estado del Articulo (Activo)";
+            label6.Text = "Estado del Cliente (Activo)";
             label6.Click += label6_Click;
             // 
             // bnGuardar

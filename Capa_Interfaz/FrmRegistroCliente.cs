@@ -39,7 +39,7 @@ namespace Capa_Interfaz // Define el espacio de nombres para la capa de interfaz
 
         private void label6_Click(object sender, EventArgs e) // Manejador de eventos para el clic del 'label6'.
         {
-            // Este metodo esta vacio, lo que significa que no hay logica especifica implementada para el clic en el label en este momento.
+            
         }
 
         private void bnGuardar_Click(object sender, EventArgs e) // Manejador de eventos para el clic del boton "Guardar".
