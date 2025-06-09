@@ -79,7 +79,7 @@
             // cboCliente
             // 
             cboCliente.FormattingEnabled = true;
-            cboCliente.Location = new Point(206, 171);
+            cboCliente.Location = new Point(206, 162);
             cboCliente.Name = "cboCliente";
             cboCliente.Size = new Size(174, 23);
             cboCliente.TabIndex = 3;
@@ -87,14 +87,14 @@
             // cboRepartidor
             // 
             cboRepartidor.FormattingEnabled = true;
-            cboRepartidor.Location = new Point(206, 229);
+            cboRepartidor.Location = new Point(206, 219);
             cboRepartidor.Name = "cboRepartidor";
             cboRepartidor.Size = new Size(174, 23);
             cboRepartidor.TabIndex = 4;
             // 
             // txtDireccion
             // 
-            txtDireccion.Location = new Point(206, 300);
+            txtDireccion.Location = new Point(206, 276);
             txtDireccion.Name = "txtDireccion";
             txtDireccion.Size = new Size(174, 23);
             txtDireccion.TabIndex = 5;
@@ -117,7 +117,7 @@
             // 
             // btnAgregarArticulo
             // 
-            btnAgregarArticulo.Location = new Point(292, 161);
+            btnAgregarArticulo.Location = new Point(292, 152);
             btnAgregarArticulo.Name = "btnAgregarArticulo";
             btnAgregarArticulo.Size = new Size(129, 35);
             btnAgregarArticulo.TabIndex = 10;
@@ -128,9 +128,9 @@
             // dgvDetalle
             // 
             dgvDetalle.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvDetalle.Location = new Point(12, 619);
+            dgvDetalle.Location = new Point(0, 214);
             dgvDetalle.Name = "dgvDetalle";
-            dgvDetalle.Size = new Size(771, 180);
+            dgvDetalle.Size = new Size(771, 237);
             dgvDetalle.TabIndex = 11;
             // 
             // label2
@@ -144,7 +144,7 @@
             // 
             // btnRegistrarPedido
             // 
-            btnRegistrarPedido.Location = new Point(304, 820);
+            btnRegistrarPedido.Location = new Point(231, 319);
             btnRegistrarPedido.Name = "btnRegistrarPedido";
             btnRegistrarPedido.Size = new Size(129, 33);
             btnRegistrarPedido.TabIndex = 13;
@@ -154,6 +154,7 @@
             // 
             // gbEncabezado
             // 
+            gbEncabezado.Controls.Add(btnRegistrarPedido);
             gbEncabezado.Controls.Add(label5);
             gbEncabezado.Controls.Add(label4);
             gbEncabezado.Controls.Add(label3);
@@ -174,7 +175,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(231, 282);
+            label5.Location = new Point(231, 258);
             label5.Name = "label5";
             label5.Size = new Size(116, 15);
             label5.TabIndex = 9;
@@ -183,7 +184,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(231, 211);
+            label4.Location = new Point(231, 201);
             label4.Name = "label4";
             label4.Size = new Size(109, 15);
             label4.TabIndex = 8;
@@ -192,7 +193,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(240, 153);
+            label3.Location = new Point(240, 144);
             label3.Name = "label3";
             label3.Size = new Size(91, 15);
             label3.TabIndex = 7;
@@ -209,6 +210,7 @@
             // 
             // gbDetalle
             // 
+            gbDetalle.Controls.Add(dgvDetalle);
             gbDetalle.Controls.Add(label7);
             gbDetalle.Controls.Add(label6);
             gbDetalle.Controls.Add(cboArticulo);
@@ -217,7 +219,7 @@
             gbDetalle.Controls.Add(label2);
             gbDetalle.Location = new Point(12, 396);
             gbDetalle.Name = "gbDetalle";
-            gbDetalle.Size = new Size(771, 418);
+            gbDetalle.Size = new Size(771, 457);
             gbDetalle.TabIndex = 15;
             gbDetalle.TabStop = false;
             gbDetalle.Text = "Agregar Articulos al Pedido";
@@ -245,8 +247,6 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(795, 865);
-            Controls.Add(btnRegistrarPedido);
-            Controls.Add(dgvDetalle);
             Controls.Add(gbEncabezado);
             Controls.Add(gbDetalle);
             Name = "FrmRegistroPedido";

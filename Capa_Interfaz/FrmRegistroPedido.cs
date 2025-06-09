@@ -88,7 +88,7 @@ namespace Capa_Interfaz // Define el espacio de nombres para la capa de interfaz
                 // Cargar clientes activos.
                 var clientes = logicaCliente.ObtenerActivos(); // Obtiene la lista de clientes activos.
                 cboCliente.Items.Clear(); // Limpia los items existentes en el ComboBox de clientes.
-                cboCliente.Items.Add("-- Seleccione Cliente --"); // Agrega un item por defecto.
+                cboCliente.Items.Add(""); // Agrega un item por defecto.
 
                 foreach (var cliente in clientes) // Itera sobre cada cliente.
                 {
@@ -102,7 +102,7 @@ namespace Capa_Interfaz // Define el espacio de nombres para la capa de interfaz
                 // Cargar repartidores activos.
                 var repartidores = logicaRepartidor.ObtenerActivos(); // Obtiene la lista de repartidores activos.
                 cboRepartidor.Items.Clear(); // Limpia los items existentes en el ComboBox de repartidores.
-                cboRepartidor.Items.Add("-- Seleccione Repartidor --"); // Agrega un item por defecto.
+                cboRepartidor.Items.Add(""); // Agrega un item por defecto.
 
                 foreach (var repartidor in repartidores) // Itera sobre cada repartidor.
                 {
@@ -116,7 +116,7 @@ namespace Capa_Interfaz // Define el espacio de nombres para la capa de interfaz
                 // Cargar articulos activos.
                 var articulos = logicaArticulo.ObtenerActivos(); // Obtiene la lista de articulos activos.
                 cboArticulo.Items.Clear(); // Limpia los items existentes en el ComboBox de articulos.
-                cboArticulo.Items.Add("-- Seleccione Articulo --"); // Agrega un item por defecto.
+                cboArticulo.Items.Add(""); // Agrega un item por defecto.
 
                 foreach (var articulo in articulos) // Itera sobre cada articulo.
                 {
