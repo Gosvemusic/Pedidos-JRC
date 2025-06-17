@@ -32,7 +32,6 @@
             txtDescripcion = new TextBox();
             txtId = new TextBox();
             btnGuardar = new Button();
-            btnLimpiar = new Button();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -69,16 +68,6 @@
             btnGuardar.UseVisualStyleBackColor = true;
             btnGuardar.Click += btnGuardar_Click;
             // 
-            // btnLimpiar
-            // 
-            btnLimpiar.Location = new Point(308, 331);
-            btnLimpiar.Name = "btnLimpiar";
-            btnLimpiar.Size = new Size(75, 23);
-            btnLimpiar.TabIndex = 4;
-            btnLimpiar.Text = "Limpiar";
-            btnLimpiar.UseVisualStyleBackColor = true;
-            btnLimpiar.Click += btnLimpiar_Click;
-            // 
             // label1
             // 
             label1.AutoSize = true;
@@ -114,7 +103,6 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(btnLimpiar);
             Controls.Add(btnGuardar);
             Controls.Add(txtId);
             Controls.Add(txtDescripcion);
@@ -131,7 +119,6 @@
         private TextBox txtDescripcion;
         private TextBox txtId;
         private Button btnGuardar;
-        private Button btnLimpiar;
         private Label label1;
         private Label label2;
         private Label label3;

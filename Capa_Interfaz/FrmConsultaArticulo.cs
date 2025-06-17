@@ -72,7 +72,7 @@ namespace Capa_Interfaz // Define el espacio de nombres para la capa de interfaz
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e) // Manejador de eventos para el clic en el contenido de una celda del DataGridView.
         {
-            // Este metodo esta vacio, lo que significa que no hay logica especifica implementada para el clic en el contenido de la celda en este momento.
+            
         }
     }
 }

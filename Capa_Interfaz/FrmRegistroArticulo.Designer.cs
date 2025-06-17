@@ -35,7 +35,6 @@
             txtInventario = new TextBox();
             cboActivo = new ComboBox();
             btnGuardar = new Button();
-            btnLimpiar = new Button();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -98,15 +97,6 @@
             btnGuardar.UseVisualStyleBackColor = true;
             btnGuardar.Click += btnGuardar_Click;
             // 
-            // btnLimpiar
-            // 
-            btnLimpiar.Location = new Point(306, 535);
-            btnLimpiar.Name = "btnLimpiar";
-            btnLimpiar.Size = new Size(75, 23);
-            btnLimpiar.TabIndex = 7;
-            btnLimpiar.Text = "Limpiar";
-            btnLimpiar.UseVisualStyleBackColor = true;
-            // 
             // label1
             // 
             label1.AutoSize = true;
@@ -141,7 +131,7 @@
             label4.Name = "label4";
             label4.Size = new Size(191, 15);
             label4.TabIndex = 11;
-            label4.Text = "Monto del artículo (Solo Numeros)";
+            label4.Text = "Monto del articulo (Solo Numeros)";
             // 
             // label5
             // 
@@ -172,7 +162,6 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(btnLimpiar);
             Controls.Add(btnGuardar);
             Controls.Add(cboActivo);
             Controls.Add(txtInventario);
@@ -195,7 +184,6 @@
         private TextBox txtInventario;
         private ComboBox cboActivo;
         private Button btnGuardar;
-        private Button btnLimpiar;
         private Label label1;
         private Label label2;
         private Label label3;

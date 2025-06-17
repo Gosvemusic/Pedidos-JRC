@@ -4,8 +4,6 @@
 //* [Javier Rojas Cordero]//
 //* Fecha: 27/05/2025//
 
-
-
 using Capa_Entidades;
 using System;
 
@@ -96,3 +94,4 @@ namespace Capa_Acceso_Datos
     }
 }
 
+//Como referencias se utilizaron los libros (Como programar en C#, Harvey M. Deitel), (Guia de Estudio, Programacion Avanzada, Carlos H. Hernandez Alvarado, como tambien las tutorias del curso)

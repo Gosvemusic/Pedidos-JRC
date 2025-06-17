@@ -98,7 +98,7 @@ namespace Capa_Interfaz // Define el espacio de nombres para la capa de interfaz
 
         private void cboActivo_SelectedIndexChanged(object sender, EventArgs e) // Manejador de eventos para el cambio de seleccion en el ComboBox 'cboActivo'.
         {
-            // Este metodo esta vacio, lo que significa que no hay logica especifica implementada para el cambio de seleccion en este momento.
+            
         }
     }
 }

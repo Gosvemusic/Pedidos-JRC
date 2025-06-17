@@ -105,11 +105,6 @@ namespace Capa_Interfaz // Define el espacio de nombres para la capa de interfaz
             }
         }
 
-        private void btnLimpiar_Click(object sender, EventArgs e) // Manejador de eventos para el clic del boton "Limpiar".
-        {
-            LimpiarCampos(); // Llama al metodo para limpiar todos los campos del formulario.
-        }
-
         private void LimpiarCampos() // Metodo privado para limpiar los controles del formulario.
         {
             txtId.Clear(); // Limpia el texto del campo ID.

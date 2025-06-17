@@ -18,7 +18,7 @@ namespace Capa_Log_Negocio // Define el espacio de nombres para la capa de logic
         {
             try // Inicia un bloque try para manejar posibles excepciones durante la operacion.
             {
-                // Validaciones // Comentario que indica el inicio de las reglas de negocio para la insercion de un repartidor.
+                // Validaciones indica el inicio de las reglas de negocio para la insercion de un repartidor.
                 if (repartidor.Identificacion <= 0) // Valida que la identificacion del repartidor sea un valor positivo.
                     return "La identificacion debe ser mayor a cero"; // Retorna un mensaje de error si la validacion falla.
 

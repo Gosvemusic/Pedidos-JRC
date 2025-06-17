@@ -12,7 +12,7 @@ using System.Threading.Tasks; // Importa el espacio de nombres para trabajar con
 
 namespace Capa_Log_Negocio // Define el espacio de nombres para la capa de logica de negocio de la aplicacion.
 {
-    internal class LogDetallePedido // Declara la clase LogDetallePedido como interna. Esto significa que solo es accesible dentro del mismo ensamblado (proyecto).
+    internal class LogDetallePedido // Declara la clase LogDetallePedido como interna, significa que solo es accesible dentro del mismo proyecto.
     {
     }
 }

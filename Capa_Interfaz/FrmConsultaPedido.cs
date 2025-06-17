@@ -184,9 +184,9 @@ namespace Capa_Interfaz // Define el espacio de nombres para la capa de interfaz
             }
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e) // Metodo generado por el diseñador, actualmente sin logica.
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e) 
         {
-            // Metodo vacio del designer // Comentario que indica que el metodo esta vacio y es generado por el diseñador.
+            
         }
     }
 }

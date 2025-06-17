@@ -38,7 +38,6 @@
             lblFechaCon = new Label();
             cboActivo = new ComboBox();
             btnGuardar = new Button();
-            btnLimpiar = new Button();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -125,15 +124,6 @@
             btnGuardar.UseVisualStyleBackColor = true;
             btnGuardar.Click += btnGuardar_Click;
             // 
-            // btnLimpiar
-            // 
-            btnLimpiar.Location = new Point(261, 638);
-            btnLimpiar.Name = "btnLimpiar";
-            btnLimpiar.Size = new Size(75, 23);
-            btnLimpiar.TabIndex = 10;
-            btnLimpiar.Text = "Limpiar";
-            btnLimpiar.UseVisualStyleBackColor = true;
-            // 
             // label1
             // 
             label1.AutoSize = true;
@@ -189,7 +179,6 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(btnLimpiar);
             Controls.Add(btnGuardar);
             Controls.Add(cboActivo);
             Controls.Add(lblFechaCon);
@@ -218,7 +207,6 @@
         private Label lblFechaCon;
         private ComboBox cboActivo;
         private Button btnGuardar;
-        private Button btnLimpiar;
         private Label label1;
         private Label label2;
         private Label label3;

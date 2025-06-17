@@ -81,4 +81,4 @@ namespace Capa_Acceso_Datos
     }
 }
 
-
+//Como referencias se utilizaron los libros (Como programar en C#, Harvey M. Deitel), (Guia de Estudio, Programacion Avanzada, Carlos H. Hernandez Alvarado, como tambien las tutorias del curso)

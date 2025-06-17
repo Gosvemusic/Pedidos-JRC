@@ -66,10 +66,6 @@ namespace Capa_Interfaz // Define el espacio de nombres para la capa de interfaz
             }
         }
 
-        private void btnLimpiar_Click(object sender, EventArgs e) // Evento Click del boton "Limpiar".
-        {
-            LimpiarCampos(); // Llama al metodo para limpiar los campos del formulario.
-        }
 
         private void LimpiarCampos() // Metodo para limpiar todos los campos del formulario.
         {
